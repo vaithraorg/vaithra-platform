@@ -1,18 +1,292 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Global Startup Map — Vaithra</title>
-  <style>body{font-family:system-ui;margin:0;background:#f7f8fb}.wrap{max-width:1100px;margin:0 auto;padding:24px}.card{background:#fff;padding:16px;border-radius:10px;box-shadow:0 6px 18px rgba(12,40,80,0.04)}</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vaithra RankBattle</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --panel:#ffffff;
+      --line:#e5e7eb;
+      --text:#0f172a;
+      --muted:#64748b;
+      --soft:#f8fafc;
+      --accent:#ef4444;
+      --accent2:#2563eb;
+      --good:#059669;
+      --shadow:0 14px 40px rgba(15,23,42,.08);
+      --shadow2:0 18px 50px rgba(239,68,68,.14);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(239,68,68,.06), transparent 24%),
+        radial-gradient(circle at top right, rgba(37,99,235,.05), transparent 22%),
+        var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:1280px;margin:0 auto;padding:24px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:8px 0 18px;border-bottom:1px solid var(--line)}
+    .logo{display:flex;align-items:center;gap:12px}
+    .mark{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 0 8px rgba(239,68,68,.08)}
+    h1,h2,h3,p{margin:0}
+    .brand h1{font-size:28px;letter-spacing:-.04em}
+    .brand p{margin-top:6px;color:var(--muted)}
+    .badge{padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;box-shadow:var(--shadow);font-size:14px;white-space:nowrap}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:18px;align-items:start}
+    .hero-left,.hero-right,.card{border:1px solid var(--line);border-radius:24px;background:var(--panel);box-shadow:var(--shadow);overflow:hidden}
+    .hero-left{padding:22px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#fff1f2;color:#9f1239;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    .headline{margin-top:16px;font-size:54px;line-height:1.02;letter-spacing:-.06em;max-width:12ch}
+    .headline span{color:var(--accent)}
+    .sub{margin-top:14px;font-size:18px;line-height:1.5;color:#334155;max-width:54ch}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+    .stat{background:linear-gradient(180deg,#fff,#fafafa);border:1px solid var(--line);border-radius:18px;padding:14px}
+    .stat .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .stat .v{margin-top:8px;font-size:22px;font-weight:900}
+    .stat .mini{margin-top:6px;font-size:13px;color:#475569}
+    .livebar{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .live{padding:8px 12px;border-radius:999px;background:#fee2e2;color:#991b1b;font-weight:800;font-size:12px;letter-spacing:.06em}
+    .pulse{position:relative}
+    .pulse:after{content:'';position:absolute;inset:-5px;border-radius:999px;border:1px solid rgba(239,68,68,.35);animation:pulse 1.8s infinite}
+    @keyframes pulse{0%{transform:scale(.92);opacity:.8}70%{transform:scale(1.18);opacity:0}100%{opacity:0}}
+    .ctaRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .btn{border:none;border-radius:16px;padding:14px 18px;font-weight:900;cursor:pointer;font-size:15px}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),#fb7185);color:#fff;box-shadow:var(--shadow2)}
+    .btn.secondary{background:#fff;border:1px solid var(--line);color:var(--text)}
+    .hero-right{padding:18px;background:linear-gradient(180deg,#fff, #fff8f8)}
+    .sectionTitle{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px}
+    .sectionTitle h2{font-size:20px;letter-spacing:-.03em}
+    .sectionTitle .hint{font-size:13px;color:var(--muted)}
+    .leaderboard{display:grid;gap:12px}
+    .row{display:grid;grid-template-columns:68px 1fr auto;gap:12px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+    .row:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+    .row.top1{border-color:rgba(239,68,68,.35);box-shadow:0 14px 42px rgba(239,68,68,.10);background:linear-gradient(180deg,#fff, #fff7f7)}
+    .rankBadge{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:18px;background:#0f172a;color:#fff;font-weight:900;font-size:20px}
+    .row.top1 .rankBadge{background:linear-gradient(135deg,var(--accent),#fb7185)}
+    .name{font-size:17px;font-weight:900;letter-spacing:-.02em}
+    .meta{margin-top:5px;color:var(--muted);font-size:13px}
+    .amt{font-size:20px;font-weight:1000;letter-spacing:-.03em}
+    .up{display:inline-flex;align-items:center;gap:6px;margin-top:6px;color:var(--good);font-weight:800;font-size:12px}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:12px;font-weight:800}
+    .strip{margin-top:18px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+    .card{padding:18px}
+    .livefeed{display:flex;flex-direction:column;gap:10px}
+    .feedItem{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:var(--soft);border:1px solid var(--line);border-radius:16px}
+    .feedItem b{color:#111827}
+    .feedItem span{color:var(--muted);font-size:13px}
+    .formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{display:flex;flex-direction:column;gap:8px}
+    label{font-size:13px;color:var(--muted)}
+    input,select,textarea{width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--text);outline:none;font:inherit}
+    input:focus,select:focus,textarea:focus{box-shadow:0 0 0 3px rgba(239,68,68,.08);border-color:#fca5a5}
+    .full{grid-column:1/-1}
+    .note{font-size:13px;line-height:1.55;color:var(--muted)}
+    .rules{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+    .rule{padding:14px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#fff,#fafafa)}
+    .rule .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .rule .v{margin-top:8px;font-size:18px;font-weight:900}
+    .footer{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+    .divider{height:1px;background:var(--line);margin:18px 0}
+    .smallcaps{font-size:12px;font-weight:900;color:#991b1b;text-transform:uppercase;letter-spacing:.08em}
+    .sideTitle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+    @media (max-width:980px){.hero,.strip,.rules,.stats,.formGrid{grid-template-columns:1fr}.headline{font-size:42px;max-width:none}.top{flex-direction:column;align-items:flex-start}.row{grid-template-columns:56px 1fr}.amt{grid-column:2/3;justify-self:start}}
+    @media (max-width:640px){.wrap{padding:16px}.headline{font-size:34px}.sub{font-size:16px}.row{grid-template-columns:52px 1fr}.badge{white-space:normal}}
+  </style>
 </head>
 <body>
   <div class="wrap">
-    <a href="index.html">← Home</a>
-    <h1>Global Startup Map</h1>
-    <div class="card">
-      <p style="color:#666">Browse startups connected to Vaithra and see where founders and investors are located worldwide.</p>
-      <p><em>Embed or link an interactive world map here (Mapbox/Kepler/Google Maps).</em></p>
+    <div class="top">
+      <div class="logo">
+        <div class="mark"></div>
+        <div class="brand">
+          <h1>Vaithra RankBattle</h1>
+          <p>Live leaderboard. Highest bid wins. INR-only. Fast, loud, and built to convert.</p>
+        </div>
+      </div>
+      <div class="badge pulse">LIVE: rank changes with every verified payment</div>
     </div>
+
+    <section class="hero">
+      <div class="hero-left">
+        <div class="eyebrow">Only one #1 spot</div>
+        <div class="headline">Battle for <span>visibility</span> and own the top rank.</div>
+        <p class="sub">Vaithra RankBattle turns attention into competition: list your brand, outbid the current leader, and push your way to the top with verified INR payments.</p>
+
+        <div class="stats">
+          <div class="stat"><div class="k">Current #1</div><div class="v" id="currentLeaderPrice">₹12,000</div><div class="mini">Take it with one higher verified total.</div></div>
+          <div class="stat"><div class="k">Spot pressure</div><div class="v">High</div><div class="mini">Someone can overtake at any moment.</div></div>
+          <div class="stat"><div class="k">Bids today</div><div class="v">24</div><div class="mini">Activity is moving right now.</div></div>
+        </div>
+
+        <div class="livebar">
+          <span class="live pulse">OUTBID RISK</span>
+          <span class="chip">Pay in INR</span>
+          <span class="chip">Public rank</span>
+          <span class="chip">Verified only</span>
+        </div>
+
+        <div class="ctaRow">
+          <button class="btn primary" onclick="document.getElementById('bidForm').scrollIntoView({behavior:'smooth'})">Take #1 Spot</button>
+          <button class="btn secondary" onclick="document.getElementById('leaderSection').scrollIntoView({behavior:'smooth'})">Watch Leaderboard</button>
+        </div>
+      </div>
+
+      <div class="hero-right" id="leaderSection">
+        <div class="sectionTitle">
+          <div>
+            <h2>Live leaderboard</h2>
+            <div class="hint">Top ranks update after verified payment</div>
+          </div>
+          <div class="smallcaps">Moving fast</div>
+        </div>
+        <div class="leaderboard">
+          <div class="row top1">
+            <div class="rankBadge">1</div>
+            <div>
+              <div class="name">GlowStudio</div>
+              <div class="meta">Beauty Tech · <span class="chip">Leader</span></div>
+              <div class="up">▲ Holding the top spot</div>
+            </div>
+            <div style="text-align:right">
+              <div class="amt">₹12,000</div>
+              <div class="meta">Verified total</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="rankBadge" style="background:#1e293b">2</div>
+            <div>
+              <div class="name">Vaithra</div>
+              <div class="meta">Beauty Tech · <span class="chip">Ready to climb</span></div>
+              <div class="up">▲ Needs one stronger bid</div>
+            </div>
+            <div style="text-align:right">
+              <div class="amt">₹9,500</div>
+              <div class="meta">Verified total</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="rankBadge" style="background:#334155">3</div>
+            <div>
+              <div class="name">QuickCart</div>
+              <div class="meta">Quick Commerce · <span class="chip">Rising</span></div>
+              <div class="up">▲ Bidding activity detected</div>
+            </div>
+            <div style="text-align:right">
+              <div class="amt">₹7,500</div>
+              <div class="meta">Verified total</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="strip">
+      <div class="card">
+        <div class="sideTitle">
+          <h2>Live bid activity</h2>
+          <div class="smallcaps">Recent moves</div>
+        </div>
+        <div class="livefeed">
+          <div class="feedItem"><div><b>Vaithra</b><div><span>Raised by ₹2,000 in Beauty Tech</span></div></div><span>2m ago</span></div>
+          <div class="feedItem"><div><b>GlowStudio</b><div><span>Defended #1 with a new verified bid</span></div></div><span>5m ago</span></div>
+          <div class="feedItem"><div><b>QuickCart</b><div><span>Entered top 3 with a fresh boost</span></div></div><span>8m ago</span></div>
+        </div>
+      </div>
+
+      <div class="card" id="bidForm">
+        <div class="sideTitle">
+          <h2>Place your bid</h2>
+          <div class="smallcaps">INR only</div>
+        </div>
+        <p class="note">Enter your brand, choose a category, and the app calculates the verified total. In production, the payment must be confirmed by backend verification before the rank updates.</p>
+        <div class="divider"></div>
+        <form id="form" class="formGrid">
+          <div class="field full"><label>Brand URL</label><input id="url" value="https://vaithra.com" /></div>
+          <div class="field"><label>Brand Name</label><input id="name" value="Vaithra" /></div>
+          <div class="field"><label>Handle</label><input id="handle" value="@vaithra" /></div>
+          <div class="field"><label>Category</label><select id="category"><option>Beauty Tech</option><option>Quick Commerce</option><option>Consumer App</option><option>Startup</option></select></div>
+          <div class="field"><label>Current Total (₹)</label><input id="current" type="number" value="9500" min="0" step="1" /></div>
+          <div class="field"><label>Your Bid (₹)</label><input id="bid" type="number" value="2500" min="499" step="1" /></div>
+          <div class="field full"><label>Goal</label><input id="goal" value="Beat the current #1 and claim the top slot." /></div>
+          <div class="field full"><label>Notes</label><textarea id="notes" rows="3">Use whole rupees only. Equal totals keep earlier verified listing ahead. Rank updates only after payment verification.</textarea></div>
+          <div class="field full">
+            <div class="panel" style="padding:14px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#fff,#fff7f7)">
+              <div class="k" style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em">Estimated verified total</div>
+              <div class="v" id="calcLine" style="font-size:24px;font-weight:1000;margin-top:8px">₹12,000</div>
+              <div class="note" id="calcSub" style="margin-top:6px">Current total ₹9,500 + bid ₹2,500 = ₹12,000.</div>
+            </div>
+          </div>
+          <div class="field full ctaRow" style="margin-top:2px">
+            <button type="submit" class="btn primary">Preview Rank Impact</button>
+            <button type="button" class="btn secondary" id="resetBtn">Reset Fields</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <div class="sideTitle">
+        <h2>Rules and pricing</h2>
+        <div class="smallcaps">Simple and sharp</div>
+      </div>
+      <div class="rules">
+        <div class="rule"><div class="k">New listing minimum</div><div class="v">₹499</div></div>
+        <div class="rule"><div class="k">Boost minimum</div><div class="v">₹499</div></div>
+        <div class="rule"><div class="k">Take #1 rule</div><div class="v">₹500 above leader</div></div>
+        <div class="rule"><div class="k">Currency</div><div class="v">INR only</div></div>
+      </div>
+      <div class="divider"></div>
+      <p class="note">The leaderboard should always remain public, the payment state should always be verified, and the rank order should always be determined by verified totals first, then earlier payment time as the tie-breaker. Razorpay is the best India-first payment layer for this flow, and backend verification should happen before any rank write occurs. [web:23][web:24][web:25][web:31]</p>
+    </section>
+
+    <div class="footer">Vaithra RankBattle is designed for white-first clarity with aggressive viral energy: leaderboard first, bid second, and ranking pressure everywhere.</div>
   </div>
+
+  <script>
+    const fmt = n => '₹' + Number(n).toLocaleString('en-IN');
+    const current = document.getElementById('current');
+    const bid = document.getElementById('bid');
+    const calcLine = document.getElementById('calcLine');
+    const calcSub = document.getElementById('calcSub');
+    function updateCalc(){
+      const c = Math.max(0, parseInt(current.value || '0', 10));
+      const b = Math.max(0, parseInt(bid.value || '0', 10));
+      const total = c + b;
+      calcLine.textContent = fmt(total);
+      calcSub.textContent = 'Current total ' + fmt(c) + ' + bid ' + fmt(b) + ' = ' + fmt(total) + '.';
+      document.getElementById('currentLeaderPrice').textContent = fmt(Math.max(12000, total));
+    }
+    [current, bid].forEach(el => el.addEventListener('input', updateCalc));
+    updateCalc();
+    document.getElementById('form').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const handle = document.getElementById('handle').value.trim();
+      const category = document.getElementById('category').value;
+      const url = document.getElementById('url').value.trim();
+      const total = Math.max(0, parseInt(current.value || '0', 10)) + Math.max(0, parseInt(bid.value || '0', 10));
+      alert(`Preview
+${name} (${handle})
+${category}
+${url}
+Verified total: ${fmt(total)}
+Next step: payment verification then rank update.`);
+    });
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      document.getElementById('form').reset();
+      document.getElementById('url').value = 'https://vaithra.com';
+      document.getElementById('name').value = 'Vaithra';
+      document.getElementById('handle').value = '@vaithra';
+      document.getElementById('current').value = 9500;
+      document.getElementById('bid').value = 2500;
+      updateCalc();
+    });
+  </script>
 </body>
 </html>
