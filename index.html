@@ -1,119 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Vaithra — Connecting startups, founders & investors</title>
-  <meta name="description" content="A comprehensive web platform connecting startups, founders, and investors in Vijayawada with global reach." />
-  <style>
-    :root { --accent:#0b74de; --muted:#666; --bg:#f7f8fb; --card:#fff; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
-    body { margin:0; background:var(--bg); color:#111; line-height:1.45; }
-    .wrap { max-width:1100px; margin:0 auto; padding:24px; }
-    header { background:linear-gradient(90deg, #fff, #f3fbff); border-bottom:1px solid #e6eef9; }
-    nav { display:flex; gap:12px; align-items:center; justify-content:space-between; padding:12px 0; }
-    .brand { font-weight:700; color:var(--accent); font-size:1.25rem; text-decoration:none; }
-    .navlinks a { margin-left:14px; color:#111; text-decoration:none; font-size:0.95rem; }
-    .hero { display:flex; gap:32px; align-items:center; padding:40px 0; }
-    .hero .left { flex:1; }
-    .hero h1 { margin:0 0 12px 0; font-size:2rem; }
-    .cta { display:inline-block; background:var(--accent); color:#fff; padding:10px 16px; border-radius:8px; text-decoration:none; }
-    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:20px; }
-    .card { background:var(--card); padding:16px; border-radius:10px; box-shadow:0 6px 18px rgba(12,40,80,0.04); }
-    footer { padding:28px 0; color:var(--muted); font-size:0.9rem; text-align:center; margin-top:34px; }
-    .grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
-    @media (max-width:720px){ .hero { flex-direction:column } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaithra - The Home for Founders & Startups</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
 </head>
-<body>
-  <header>
-    <div class="wrap">
-      <nav>
-        <a class="brand" href="index.html">Vaithra</a>
-        <div class="navlinks">
-          <a href="about.html">About</a>
-          <a href="founders.html">Founders</a>
-          <a href="investor.html">Investors</a>
-          <a href="events.html">Events</a>
-          <a href="vijayawada-map.html">Maps</a>
-          <a href="contact.html">Contact</a>
+<body class="min-h-screen bg-[#F5F5F7] text-gray-900 selection:bg-black selection:text-white flex flex-col relative">
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="fixed inset-0 z-[100] hidden items-center justify-center">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleModal('login-modal')"></div>
+    <div class="bg-white rounded-3xl p-8 w-full max-w-md relative z-10 shadow-2xl">
+      <button onclick="toggleModal('login-modal')" class="absolute top-6 right-6 text-gray-400 hover:text-black">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <div class="w-10 h-10 bg-black rounded-full flex items-center justify-center mb-6">
+        <span class="text-white text-lg font-bold">V</span>
+      </div>
+      <h2 class="text-2xl font-black mb-2">Join Vaithra</h2>
+      <p class="text-sm text-gray-500 mb-6">Enter the founder credibility network.</p>
+      
+      <form class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
+          <input type="email" placeholder="founder@startup.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black outline-none">
         </div>
-      </nav>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
+          <input type="password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black outline-none">
+        </div>
+        <button type="button" class="w-full bg-black text-white font-bold py-3.5 rounded-xl hover:bg-gray-800 transition-colors mt-2">
+          Sign In
+        </button>
+      </form>
     </div>
-  </header>
+  </div>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="left">
-        <h1>Connecting Vijayawada startups, founders & investors — globally</h1>
-        <p style="color:var(--muted); margin:0 0 18px;">
-          Vaithra Platform helps founders showcase their startups, discover resources, find events, and raise investor interest — locally and across the world.
-        </p>
-        <a class="cta" href="founders.html">Explore Founders</a>
-        <a class="cta" href="investor.html" style="background:#fff;color:var(--accent);border:1px solid var(--accent); margin-left:8px;">Investor Portal</a>
-      </div>
-      <div style="width:360px;">
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Next Meetup</h3>
-          <p style="margin:0;color:var(--muted);">Vijayawada Startup Mixer — Sat, 14th</p>
-          <a href="events.html" style="display:inline-block;margin-top:10px;text-decoration:none;color:var(--accent);">View events →</a>
-        </div>
-        <div style="height:12px"></div>
-        <div class="card">
-          <h4 style="margin:0 0 6px 0;">Featured Startup</h4>
-          <p style="margin:0;color:var(--muted);">A short blurb about a promising local startup.</p>
-        </div>
-      </div>
-    </section>
+  <!-- Navigation -->
+  <nav class="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center relative z-50">
+    <div class="text-2xl font-black tracking-tight">VAITHRA</div>
+    <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-600">
+      <a href="index.html" class="hover:text-black transition-colors">Home</a>
+      <a href="events.html" class="hover:text-black transition-colors">Events</a>
+      <a href="founders.html" class="hover:text-black transition-colors">Founders</a>
+      <a href="resources.html" class="hover:text-black transition-colors">Resources</a>
+      <button onclick="toggleModal('login-modal')" class="hover:text-black transition-colors">Login</button>
+    </div>
+    <div class="hidden md:block">
+      <button onclick="toggleModal('login-modal')" class="bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-800 transition-all">
+        Join Vaithra
+      </button>
+    </div>
+  </nav>
+  
+  <div class="w-full h-px bg-gray-200 mb-12"></div>
 
-    <section>
-      <h2>What we provide</h2>
-      <div class="features">
-        <div class="card">
-          <h4>Founder Profiles</h4>
-          <p class="muted" style="color:var(--muted)">Showcase your team & story, connect with mentors.</p>
-        </div>
-        <div class="card">
-          <h4>Investor Connections</h4>
-          <p class="muted" style="color:var(--muted)">Investor portal, pitch sharing & curated intros.</p>
-        </div>
-        <div class="card">
-          <h4>Maps & Discovery</h4>
-          <p class="muted" style="color:var(--muted)">Browse Vijayawada & global startup locations.</p>
-        </div>
-        <div class="card">
-          <h4>Resources & Templates</h4>
-          <p class="muted" style="color:var(--muted)">Pitch deck templates, agreements and learning resources.</p>
-        </div>
-      </div>
-    </section>
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl mx-auto px-6 flex flex-col items-center text-center pb-20">
+    
+    <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-8 max-w-4xl">
+      THE HOME FOR FOUNDERS, <br> STARTUPS & CONNECTIONS
+    </h1>
+    
+    <div class="flex space-x-4 mb-20">
+      <a href="vijayawada-map.html" class="bg-white border-2 border-black text-black px-8 py-3.5 rounded-full font-bold hover:bg-gray-50 transition-all">
+        Explore Startup Map
+      </a>
+      <button onclick="toggleModal('login-modal')" class="bg-black border-2 border-black text-white px-8 py-3.5 rounded-full font-bold hover:bg-gray-800 transition-all">
+        Join Vaithra
+      </button>
+    </div>
 
-    <section style="margin-top:22px;">
-      <h2>Quicklinks</h2>
-      <div class="grid">
-        <div class="card"><strong>Maps</strong><div style="color:var(--muted)">Vijayawada & world maps</div><a href="vijayawada-map.html">Open →</a></div>
-        <div class="card"><strong>Weekly Resources</strong><div style="color:var(--muted)">Curated articles & tools</div><a href="weekly.html">Open →</a></div>
-        <div class="card"><strong>Pitch Templates</strong><div style="color:var(--muted)">Decks & agreements</div><a href="templates.html">Open →</a></div>
-        <div class="card"><strong>Stories</strong><div style="color:var(--muted)">Promote your journey</div><a href="story.html">Open →</a></div>
-      </div>
-    </section>
+    <!-- FULL BENTO GRID -->
+    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 grid-auto-rows-min gap-4 text-left">
+      
+      <!-- Center Map (Row 1-2, Col 2-3) -->
+      <a href="world-map.html" class="group md:col-start-2 md:col-span-2 md:row-start-1 md:row-span-2 rounded-3xl bg-[#FAF6E3] overflow-hidden relative border border-gray-200 flex items-center justify-center min-h-[350px] hover:shadow-xl transition-all block">
+        <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&q=80" alt="Vintage Map Base" class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-700">
+        <div class="relative z-10 flex flex-col items-center">
+            <h2 class="text-6xl font-black tracking-tighter drop-shadow-md mb-2">Vaithra</h2>
+            <span class="bg-black text-white text-xs font-bold px-4 py-2 rounded-full flex items-center space-x-2">
+                <span>View Startup Map</span>
+            </span>
+        </div>
+      </a>
 
-    <section style="margin-top:26px;">
-      <h2>Latest blog posts</h2>
-      <div class="grid">
-        <div class="card"><strong>How to pitch to early investors</strong><div style="color:var(--muted)">By Vaithra Team — Aug 2026</div></div>
-        <div class="card"><strong>Building an MVP in 30 days</strong><div style="color:var(--muted)">Guest post from a local founder</div></div>
-        <div class="card"><strong>Scaling from Vijayawada to the world</strong><div style="color:var(--muted)">Growth & market tips</div></div>
-      </div>
-      <p style="margin-top:12px;"><a href="blogs.html">See all blogs →</a></p>
-    </section>
+      <!-- Free APIs & AI Credits -->
+      <a href="credits.html" class="group md:col-start-1 md:col-span-1 md:row-start-1 md:row-span-1 min-h-[180px] rounded-3xl bg-black text-white p-6 relative overflow-hidden hover:bg-gray-900 transition-colors flex flex-col justify-between">
+        <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+        </div>
+        <h3 class="text-xl font-black uppercase leading-tight">Free APIs & <br> AI Credits</h3>
+        <!-- Animated Expanding Bar Arrow -->
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-white">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
 
+      <!-- Free Templates -->
+      <a href="templates.html" class="group md:col-start-1 md:col-span-1 md:row-start-2 md:row-span-1 min-h-[180px] rounded-3xl bg-white p-6 border border-gray-100 flex flex-col justify-between hover:shadow-md transition-shadow relative">
+        <p class="text-xs text-gray-400 font-bold mb-1">RESOURCES</p>
+        <h3 class="text-xl font-black uppercase leading-tight pr-8">Pitch Decks & <br> Agreements</h3>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-black">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- Founder Profiles -->
+      <a href="founders.html" class="group md:col-start-4 md:col-span-1 md:row-start-1 md:row-span-2 min-h-[350px] rounded-3xl bg-[#E1A699] p-6 relative overflow-hidden flex flex-col hover:brightness-95 transition-all">
+        <p class="text-xs font-bold mb-4 uppercase text-black/60">Credibility Layer</p>
+        <h2 class="text-3xl font-black leading-none uppercase">Founder <br> Profiles</h2>
+        <p class="text-sm font-medium mt-2">Connect like LinkedIn.</p>
+        <div class="flex -space-x-3 mt-8">
+            <div class="w-10 h-10 rounded-full bg-white border-2 border-[#E1A699]"></div>
+            <div class="w-10 h-10 rounded-full bg-gray-100 border-2 border-[#E1A699]"></div>
+            <div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-[#E1A699]"></div>
+        </div>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-black">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- 28 Districts Tour -->
+      <a href="districts-tour.html" class="group md:col-start-1 md:col-span-2 md:row-start-3 md:row-span-1 min-h-[160px] rounded-3xl bg-[#E8E8A6] p-6 relative flex items-center justify-between overflow-hidden hover:brightness-95 transition-all">
+        <div class="z-10">
+            <p class="text-xs font-bold mb-1 uppercase text-black/60">Meetups in AP</p>
+            <h3 class="text-2xl font-black uppercase leading-tight max-w-[250px]">28 Districts Tour & Albums</h3>
+        </div>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-black">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- Spread Your Story -->
+      <a href="story.html" class="group md:col-start-3 md:col-span-1 md:row-start-3 md:row-span-1 min-h-[160px] rounded-3xl bg-white p-6 border border-gray-100 flex flex-col justify-center relative hover:shadow-md transition-shadow">
+        <h3 class="text-xl font-black uppercase leading-tight mb-2">Spread Your <br> Story</h3>
+        <span class="text-[10px] font-bold text-gray-400 bg-gray-100 px-2 py-1 rounded w-max mb-2">PAID</span>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-black">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- Investor Portal -->
+      <a href="investor.html" class="group md:col-start-4 md:col-span-1 md:row-start-3 md:row-span-1 min-h-[160px] rounded-3xl bg-black text-white p-6 relative overflow-hidden flex flex-col justify-center hover:bg-gray-800 transition-colors">
+         <h3 class="text-xl font-black uppercase leading-tight mb-1">If You're An <br> Investor</h3>
+         <p class="text-xs text-gray-400">Discover startups.</p>
+         <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-white">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- NEW: Global Chat (Wide Block - Rows 4-5) -->
+      <a href="chat.html" class="group md:col-start-1 md:col-span-2 md:row-start-4 md:row-span-2 min-h-[320px] rounded-3xl bg-[#B4C5E4] p-8 relative overflow-hidden flex flex-col justify-between hover:brightness-95 transition-all">
+         <div>
+            <p class="text-xs font-bold mb-2 uppercase text-black/60">Community</p>
+            <h3 class="text-4xl font-black uppercase leading-tight">Chat with <br> Global Founders</h3>
+            <p class="text-sm font-medium mt-2 max-w-[200px]">Expand your network beyond local borders.</p>
+         </div>
+         <div class="absolute bottom-8 right-8 flex items-center transition-all duration-300 text-black">
+            <div class="h-[3px] bg-current w-4 group-hover:w-12 transition-all duration-300 ease-out"></div>
+            <svg class="w-6 h-6 -ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- NEW: YouTube Content (Small Row 4) -->
+      <a href="youtube.html" class="group md:col-start-3 md:col-span-1 md:row-start-4 md:row-span-1 min-h-[160px] rounded-3xl bg-white p-6 border border-gray-100 flex flex-col justify-between relative hover:shadow-md transition-shadow">
+        <h3 class="text-lg font-black uppercase leading-tight">Useful YouTube <br> Videos</h3>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-black">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- NEW: Blogs (Small Row 4) -->
+      <a href="blogs.html" class="group md:col-start-4 md:col-span-1 md:row-start-4 md:row-span-1 min-h-[160px] rounded-3xl bg-[#E8E8A6] p-6 flex flex-col justify-between relative hover:brightness-95 transition-all">
+        <h3 class="text-lg font-black uppercase leading-tight">Weekly <br> Blogs</h3>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-black">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- NEW: About Us (Small Row 5) -->
+      <a href="about.html" class="group md:col-start-3 md:col-span-1 md:row-start-5 md:row-span-1 min-h-[160px] rounded-3xl bg-black text-white p-6 flex flex-col justify-between relative hover:bg-gray-800 transition-all">
+        <h3 class="text-lg font-black uppercase leading-tight">About Vaivaanith</h3>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-white">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+      <!-- NEW: Contact (Small Row 5) -->
+      <a href="contact.html" class="group md:col-start-4 md:col-span-1 md:row-start-5 md:row-span-1 min-h-[160px] rounded-3xl bg-[#F0D5D1] p-6 flex flex-col justify-between relative hover:brightness-95 transition-all">
+        <h3 class="text-lg font-black uppercase leading-tight">Contact Us</h3>
+        <div class="absolute bottom-6 right-6 flex items-center transition-all duration-300 text-black">
+            <div class="h-[2.5px] bg-current w-3 group-hover:w-8 transition-all duration-300 ease-out"></div>
+            <svg class="w-5 h-5 -ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+      </a>
+
+    </div>
   </main>
 
-  <footer>
-    <div class="wrap">
-      <div style="margin-bottom:8px;">© Vaithra Platform — Vijayawada | <a href="credits.html">Credits</a> | <a href="contact.html">Contact</a></div>
-      <div style="color:var(--muted)">Built to amplify local founders and connect them with global opportunities.</div>
+  <footer class="bg-black text-white pt-16 pb-8 border-t border-gray-800 w-full mt-auto">
+    <!-- Footer content remains the same as previous step -->
+    <div class="max-w-7xl mx-auto px-6 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+      <p>&copy; 2026 Vaivaanith Pvt Ltd. All rights reserved.</p>
+      <p class="mt-2 md:mt-0">Built in Vijayawada.</p>
     </div>
   </footer>
+
+  <script>
+    function toggleModal(modalID) {
+      const modal = document.getElementById(modalID);
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+  </script>
 </body>
 </html>
